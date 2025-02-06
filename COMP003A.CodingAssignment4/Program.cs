@@ -14,30 +14,46 @@ namespace COMP003A.CodingAssignment4
             string product;
             int quantity;
 
-            Console.WriteLine("Welcome to the inventory Management System!");
-            Console.WriteLine("Inventory Management system Menu");
-            Console.WriteLine("1. Add a Product");
-            Console.WriteLine("2. Update Product Quantity");
-            Console.WriteLine("3. View Inventory Summary");
-            Console.WriteLine("4. Exit");
-            Console.Write("Enter your choice: ");
-            choice = int.Parse(Console.ReadLine());
-
-            switch (choice)
+            do
             {
-                case 1:
-                    Console.Write("Enter product name: ");
-                    product = Console.ReadLine();
+                Console.WriteLine("\nWelcome to the inventory Management System!");
+                Console.WriteLine("Inventory Management system Menu");
+                Console.WriteLine("1. Add a Product");
+                Console.WriteLine("2. Update Product Quantity");
+                Console.WriteLine("3. View Inventory Summary");
+                Console.WriteLine("4. Exit");
+                Console.Write("Enter your choice: ");
+                choice = int.Parse(Console.ReadLine());
 
-                    Console.Write("Enter product quantity: ");
-                    quantity = int.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1: // Adds Products
+                        Console.Write("Enter product name: ");
+                        product = Console.ReadLine();
 
-                    productName.Add(product);
-                    productQuantity.Add(quantity);
-                    break;
-                default:
-                    break;
-            }
+                        Console.Write("Enter product quantity: ");
+                        quantity = int.Parse(Console.ReadLine());
+
+                        productName.Add(product);
+                        productQuantity.Add(quantity);
+                        break;
+                    case 2: // Update Product Quantity
+                        break;
+                    case 3: // View Inventory Summary
+                        Console.WriteLine("\nInventory Summary:");
+                        for (int i = 0; i < productName.Count; i++)
+                        {
+                            Console.WriteLine($"- {productName[i]}: {productQuantity[i]}");
+                        }
+                        break;
+                    case 4: // Terminate the program
+                        Console.WriteLine("Goodbye");
+                        break;
+                    default:
+                        break;
+                }
+
+            } while (choice != 4);
 
         }
     }
