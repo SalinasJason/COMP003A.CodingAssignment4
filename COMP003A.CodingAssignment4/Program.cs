@@ -13,6 +13,8 @@ namespace COMP003A.CodingAssignment4
             int choice;
             string product;
             int quantity;
+            int totalProducts = 0;
+            int totalQuantity = 0;
 
             do
             {
@@ -36,6 +38,8 @@ namespace COMP003A.CodingAssignment4
 
                         productName.Add(product);
                         productQuantity.Add(quantity);
+                        totalProducts ++;
+                        totalQuantity += quantity;
                         break;
                     case 2: // Update Product Quantity
                         break;
@@ -45,6 +49,9 @@ namespace COMP003A.CodingAssignment4
                         {
                             Console.WriteLine($"- {productName[i]}: {productQuantity[i]}");
                         }
+                        Console.WriteLine($"Total Products: {totalProducts}");
+                        Console.WriteLine($"Total Quantity: {totalQuantity}");
+                        Console.WriteLine($"Average Quanity: {totalQuantity / totalProducts}");
                         break;
                     case 4: // Terminate the program
                         Console.WriteLine("Goodbye");
