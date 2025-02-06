@@ -8,7 +8,19 @@ namespace COMP003A.CodingAssignment4
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            List<string> list = new List<string>();
+            List<int> list2 = new List<int>();
+            int choice;
+
+            Console.WriteLine("Welcome to the inventory Management System!");
+            Console.WriteLine("Inventory Management system Menu");
+            Console.WriteLine("1. Add a Product");
+            Console.WriteLine("2. Update Product Quantity");
+            Console.WriteLine("3. View Inventory Summary");
+            Console.WriteLine("4. Exit");
+            Console.Write("Enter your choice: ");
+            choice = int.Parse(Console.ReadLine());
+
         }
     }
 }
