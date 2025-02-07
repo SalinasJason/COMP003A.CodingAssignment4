@@ -15,9 +15,12 @@ namespace COMP003A.CodingAssignment4
             int quantity;
             int totalProducts = 0;
             int totalQuantity = 0;
+            string ifProduct;
+            int ifProductExists;
+            int updateQuantity;
 
             do
-            {
+            {   // Menu
                 Console.WriteLine("\nWelcome to the inventory Management System!");
                 Console.WriteLine("Inventory Management system Menu");
                 Console.WriteLine("1. Add a Product");
@@ -42,6 +45,20 @@ namespace COMP003A.CodingAssignment4
                         totalQuantity += quantity;
                         break;
                     case 2: // Update Product Quantity
+                        Console.Write("\nEnter product name to update product quantity: ");
+                        ifProduct = Console.ReadLine();
+                        ifProductExists = productName.IndexOf(ifProduct);
+
+                        if (ifProductExists >= 0)
+                        {
+                            Console.Write($"Update Product Quantity: ");
+                            updateQuantity = int.Parse(Console.ReadLine());
+
+                            totalQuantity -= productQuantity[ifProductExists];
+                            productQuantity[ifProductExists] = updateQuantity;
+                            totalQuantity += updateQuantity;
+                        }
+                    
                         break;
                     case 3: // View Inventory Summary
                         Console.WriteLine("\nInventory Summary:");
