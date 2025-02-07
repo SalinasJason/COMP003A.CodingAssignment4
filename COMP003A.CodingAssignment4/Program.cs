@@ -10,25 +10,35 @@ namespace COMP003A.CodingAssignment4
         {
             List<string> productName = new List<string>();
             List<int> productQuantity = new List<int>();
-            int choice;
+            int choice = 0;
             string product;
-            int quantity;
+            int quantity = 0;
             int totalProducts = 0;
             int totalQuantity = 0;
             string ifProduct;
             int ifProductExists;
-            int updateQuantity;
+            int updateQuantity = 0;
+
+            Console.WriteLine("Welcome to the inventory Management System!");
 
             do
             {   // Menu
-                Console.WriteLine("\nWelcome to the inventory Management System!");
-                Console.WriteLine("Inventory Management system Menu");
+                Console.WriteLine("\nInventory Management system Menu");
                 Console.WriteLine("1. Add a Product");
                 Console.WriteLine("2. Update Product Quantity");
                 Console.WriteLine("3. View Inventory Summary");
                 Console.WriteLine("4. Exit");
                 Console.Write("Enter your choice: ");
-                choice = int.Parse(Console.ReadLine());
+
+                try
+                {
+                    choice = int.Parse(Console.ReadLine());
+                }
+                catch 
+                {
+                    Console.WriteLine("Invaild input, Please enter a vaild number");
+                }
+
 
                 switch (choice)
                 {
@@ -37,12 +47,22 @@ namespace COMP003A.CodingAssignment4
                         product = Console.ReadLine();
 
                         Console.Write("Enter product quantity: ");
-                        quantity = int.Parse(Console.ReadLine());
+                        try
+                        {
+                            quantity = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Product added successfully!");
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Invaild input, Please enter a valid number");
+
+                        }
 
                         productName.Add(product);
                         productQuantity.Add(quantity);
                         totalProducts ++;
                         totalQuantity += quantity;
+                     
                         break;
                     case 2: // Update Product Quantity
                         Console.Write("\nEnter product name to update product quantity: ");
@@ -52,12 +72,21 @@ namespace COMP003A.CodingAssignment4
                         if (ifProductExists >= 0)
                         {
                             Console.Write($"Update Product Quantity: ");
-                            updateQuantity = int.Parse(Console.ReadLine());
+                            try
+                            {
+                                updateQuantity = int.Parse(Console.ReadLine());
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Invaild input, Please enter a valid number");
+                            }
 
                             totalQuantity -= productQuantity[ifProductExists];
                             productQuantity[ifProductExists] = updateQuantity;
                             totalQuantity += updateQuantity;
                         }
+                        else
+                            Console.WriteLine("Product not found, Please try again");
                     
                         break;
                     case 3: // View Inventory Summary
@@ -74,6 +103,7 @@ namespace COMP003A.CodingAssignment4
                         Console.WriteLine("Goodbye");
                         break;
                     default:
+                        Console.WriteLine("Invaild input, choose between 1-4");
                         break;
                 }
 
