@@ -46,39 +46,10 @@ namespace COMP003A.CodingAssignment4
                         AddProducts();
                         break;
                     case 2: // Update Product Quantity
-                        Console.Write("\nEnter product name to update product quantity: ");
-                        ifProduct = Console.ReadLine();
-                        ifProductExists = productName.IndexOf(ifProduct);
-
-                        if (ifProductExists >= 0)
-                        {
-                            Console.Write($"Update Product Quantity: ");
-                            try
-                            {
-                                updateQuantity = int.Parse(Console.ReadLine());
-                            }
-                            catch
-                            {
-                                Console.WriteLine("Invaild input, Please enter a valid number");
-                            }
-
-                            totalQuantity -= productQuantity[ifProductExists];
-                            productQuantity[ifProductExists] = updateQuantity;
-                            totalQuantity += updateQuantity;
-                        }
-                        else
-                            Console.WriteLine("Product not found, Please try again");
-                    
+                        UpdateProductQuantity();
                         break;
                     case 3: // View Inventory Summary
-                        Console.WriteLine("\nInventory Summary:");
-                        for (int i = 0; i < productName.Count; i++)
-                        {
-                            Console.WriteLine($"- {productName[i]}: {productQuantity[i]}");
-                        }
-                        Console.WriteLine($"Total Products: {productName.Count}");
-                        Console.WriteLine($"Total Quantity: {totalQuantity}");
-                        Console.WriteLine($"Average Quanity: {totalQuantity / productName.Count}");
+                        ViewInventory();
                         break;
                     case 4: // Terminate the program
                         Console.WriteLine("Goodbye");
@@ -112,6 +83,46 @@ namespace COMP003A.CodingAssignment4
             productName.Add(product);
             productQuantity.Add(quantity);
             totalQuantity += quantity;
+        }
+
+        static void UpdateProductQuantity()
+        {
+            Console.Write("\nEnter product name to update product quantity: ");
+            ifProduct = Console.ReadLine();
+            ifProductExists = productName.IndexOf(ifProduct);
+
+            if (ifProductExists >= 0)
+            {
+                Console.Write($"Update Product Quantity: ");
+                try
+                {
+                    updateQuantity = int.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("Invaild input, Please enter a valid number");
+                }
+
+                totalQuantity -= productQuantity[ifProductExists];
+                productQuantity[ifProductExists] = updateQuantity;
+                totalQuantity += updateQuantity;
+            }
+            else
+            {
+                Console.WriteLine("Product not found, Please try again");
+            }
+        }
+
+        static void ViewInventory()
+        {
+            Console.WriteLine("\nInventory Summary:");
+            for (int i = 0; i < productName.Count; i++)
+            {
+                Console.WriteLine($"- {productName[i]}: {productQuantity[i]}");
+            }
+            Console.WriteLine($"Total Products: {productName.Count}");
+            Console.WriteLine($"Total Quantity: {totalQuantity}");
+            Console.WriteLine($"Average Quanity: {totalQuantity / productName.Count}");
         }
     }
 }
