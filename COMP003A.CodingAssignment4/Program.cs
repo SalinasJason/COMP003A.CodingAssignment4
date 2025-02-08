@@ -8,17 +8,11 @@ namespace COMP003A.CodingAssignment4
     {
         static List<string> productName = new List<string>();
         static List<int> productQuantity = new List<int>();
-        static int choice = 0;
-        static string product;
-        static int quantity = 0;
-        static int totalQuantity = 0;
-        static string ifProduct;
-        static int ifProductExists;
-        static int updateQuantity = 0;
+        static int totalQuantity;
         static void Main(string[] args)
         {
-         
 
+            int choice = 0;
             Console.WriteLine("Welcome to the inventory Management System!");
 
             do
@@ -66,13 +60,15 @@ namespace COMP003A.CodingAssignment4
         static void AddProducts()
         {
             Console.Write("Enter product name: ");
-            product = Console.ReadLine();
+            string product = Console.ReadLine();
 
             Console.Write("Enter product quantity: ");
             try
             {
-                quantity = int.Parse(Console.ReadLine());
+               int quantity = int.Parse(Console.ReadLine());
                 Console.WriteLine("Product added successfully!");
+                productName.Add(product);
+                productQuantity.Add(quantity);
             }
             catch
             {
@@ -80,32 +76,32 @@ namespace COMP003A.CodingAssignment4
 
             }
 
-            productName.Add(product);
-            productQuantity.Add(quantity);
-            totalQuantity += quantity;
+            
+
         }
 
         static void UpdateProductQuantity()
         {
             Console.Write("\nEnter product name to update product quantity: ");
-            ifProduct = Console.ReadLine();
-            ifProductExists = productName.IndexOf(ifProduct);
+           string ifProduct = Console.ReadLine();
+            int ifProductExists = productName.IndexOf(ifProduct);
 
             if (ifProductExists >= 0)
             {
                 Console.Write($"Update Product Quantity: ");
                 try
                 {
-                    updateQuantity = int.Parse(Console.ReadLine());
+                   int updateQuantity = int.Parse(Console.ReadLine());
+                    totalQuantity -= productQuantity[ifProductExists];
+                    productQuantity[ifProductExists] = updateQuantity;
+                    totalQuantity += updateQuantity;
                 }
                 catch
                 {
                     Console.WriteLine("Invaild input, Please enter a valid number");
                 }
 
-                totalQuantity -= productQuantity[ifProductExists];
-                productQuantity[ifProductExists] = updateQuantity;
-                totalQuantity += updateQuantity;
+
             }
             else
             {
@@ -116,9 +112,12 @@ namespace COMP003A.CodingAssignment4
         static void ViewInventory()
         {
             Console.WriteLine("\nInventory Summary:");
+            totalQuantity = 0;
+
             for (int i = 0; i < productName.Count; i++)
             {
                 Console.WriteLine($"- {productName[i]}: {productQuantity[i]}");
+                totalQuantity += productQuantity[i];
             }
             Console.WriteLine($"Total Products: {productName.Count}");
             Console.WriteLine($"Total Quantity: {totalQuantity}");
