@@ -6,18 +6,18 @@ namespace COMP003A.CodingAssignment4
 {
     internal class Program
     {
+        static List<string> productName = new List<string>();
+        static List<int> productQuantity = new List<int>();
+        static int choice = 0;
+        static string product;
+        static int quantity = 0;
+        static int totalQuantity = 0;
+        static string ifProduct;
+        static int ifProductExists;
+        static int updateQuantity = 0;
         static void Main(string[] args)
         {
-            List<string> productName = new List<string>();
-            List<int> productQuantity = new List<int>();
-            int choice = 0;
-            string product;
-            int quantity = 0;
-            int totalProducts = 0;
-            int totalQuantity = 0;
-            string ifProduct;
-            int ifProductExists;
-            int updateQuantity = 0;
+         
 
             Console.WriteLine("Welcome to the inventory Management System!");
 
@@ -43,26 +43,7 @@ namespace COMP003A.CodingAssignment4
                 switch (choice)
                 {
                     case 1: // Adds Products
-                        Console.Write("Enter product name: ");
-                        product = Console.ReadLine();
-
-                        Console.Write("Enter product quantity: ");
-                        try
-                        {
-                            quantity = int.Parse(Console.ReadLine());
-                            Console.WriteLine("Product added successfully!");
-                        }
-                        catch
-                        {
-                            Console.WriteLine("Invaild input, Please enter a valid number");
-
-                        }
-
-                        productName.Add(product);
-                        productQuantity.Add(quantity);
-                        totalProducts ++;
-                        totalQuantity += quantity;
-                     
+                        AddProducts();
                         break;
                     case 2: // Update Product Quantity
                         Console.Write("\nEnter product name to update product quantity: ");
@@ -95,9 +76,9 @@ namespace COMP003A.CodingAssignment4
                         {
                             Console.WriteLine($"- {productName[i]}: {productQuantity[i]}");
                         }
-                        Console.WriteLine($"Total Products: {totalProducts}");
+                        Console.WriteLine($"Total Products: {productName.Count}");
                         Console.WriteLine($"Total Quantity: {totalQuantity}");
-                        Console.WriteLine($"Average Quanity: {totalQuantity / totalProducts}");
+                        Console.WriteLine($"Average Quanity: {totalQuantity / productName.Count}");
                         break;
                     case 4: // Terminate the program
                         Console.WriteLine("Goodbye");
@@ -109,6 +90,28 @@ namespace COMP003A.CodingAssignment4
 
             } while (choice != 4);
 
+        }
+
+        static void AddProducts()
+        {
+            Console.Write("Enter product name: ");
+            product = Console.ReadLine();
+
+            Console.Write("Enter product quantity: ");
+            try
+            {
+                quantity = int.Parse(Console.ReadLine());
+                Console.WriteLine("Product added successfully!");
+            }
+            catch
+            {
+                Console.WriteLine("Invaild input, Please enter a valid number");
+
+            }
+
+            productName.Add(product);
+            productQuantity.Add(quantity);
+            totalQuantity += quantity;
         }
     }
 }
